@@ -16,8 +16,8 @@ def greedy_decode(model, src, src_mask, max_len, start_token, end_token):
         List[int]: Generated token sequence.
     """
     model.eval()  
-    
-    # Ensure the mask is of the correct type (bool or float)
+
+    # Ensure the mask is of the correct type 
     if src_mask is not None and src_mask.dtype != torch.bool:
         src_mask = src_mask.to(torch.bool)
 
