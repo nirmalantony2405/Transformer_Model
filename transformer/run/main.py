@@ -2,13 +2,13 @@ import sys
 import os
 import torch
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
-from transformer_project.modelling.model import Attention
+from transformer.modelling.model import Attention
 from datasets import load_dataset
 from torch.utils.data import DataLoader
-from transformer_project.modelling.model import clean_dataset, PositionalEncoding
-from transformer_project.tokenization.bpe_tokenizer import BPETokenizer
-from transformer_project.tokenization.hf_bpe_tokenizer import create_gpt2_tokenizer 
-from tests.test_dataset import TranslationDataset
+from transformer.modelling.model import clean_dataset, PositionalEncoding
+from transformer.tokenization.bpe_tokenizer import BPETokenizer
+from transformer.tokenization.hf_bpe_tokenizer import create_gpt2_tokenizer 
+from transformer.data.dataset import TranslationDataset
 
 if __name__ == "__main__":
     attention = Attention(d_model=512, num_heads=8)

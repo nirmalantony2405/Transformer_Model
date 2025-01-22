@@ -6,7 +6,7 @@ import sys
 from evaluate import load
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from transformer_project.modelling.transformer_model import TransformerModel
+from transformer.modelling.transformer_model import TransformerModel
 
 # Load the WMT17 German-English dataset
 dataset = load_dataset("wmt17", "de-en", split="test")

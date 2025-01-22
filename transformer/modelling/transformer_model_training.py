@@ -6,9 +6,9 @@ import sys
 
 # project root to path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
-from transformer_project.modelling.transformer_model import TransformerModel
-from transformer_project.schedulers.LR_sheduler import TransformerLRScheduler
-from transformer_project.data.dataset import get_dataloaders
+from transformer.modelling.transformer_model import TransformerModel
+from transformer.schedulers.LR_sheduler import TransformerLRScheduler
+from transformer.data.dataset import get_dataloaders
 from torch.utils.data import DataLoader
 
 
