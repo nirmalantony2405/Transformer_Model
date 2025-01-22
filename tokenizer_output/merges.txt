@@ -1,0 +1,16 @@
+#version: 0.2
+_ t
+p a
+pa t
+pat h
+path _t
+path_t o
+path_to _t
+path_to_t e
+path_to_te x
+path_to_tex t
+path_to_text _
+path_to_text_ f
+path_to_text_f i
+path_to_text_fi l
+path_to_text_fil e
