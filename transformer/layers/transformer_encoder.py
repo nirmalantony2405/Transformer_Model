@@ -3,8 +3,8 @@ import os
 import sys
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
-from transformer_project.layers.multi_head_attention import MultiHeadAttention
-from transformer_project.layers.feedforward import PositionWiseFeedForward
+from transformer.layers.multi_head_attention import MultiHeadAttention
+from transformer.layers.feedforward import PositionWiseFeedForward
 class TransformerEncoderLayer(nn.Module):
     def __init__(self, embed_dim, num_heads, feedforward_dim, dropout=0.1):
         super(TransformerEncoderLayer, self).__init__()
