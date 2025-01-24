@@ -4,8 +4,8 @@ import os
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 if project_root not in sys.path:
     sys.path.append(project_root)
-from transformer_project.tokenization.bpe_tokenizer import BPETokenizer
-from transformer_project.tokenization.hf_bpe_tokenizer import HuggingfaceBPETokenizer
+from transformer.tokenization.bpe_tokenizer import BPETokenizer
+from transformer.tokenization.hf_bpe_tokenizer import HuggingfaceBPETokenizer
 
 class TestBPETokenizers(unittest.TestCase):
     def setUp(self):
