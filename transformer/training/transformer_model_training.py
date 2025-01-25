@@ -3,14 +3,10 @@ from torch.utils.data import DataLoader
 from torch import nn
 import os
 import sys
-
-# project root to path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 from transformer.modelling.transformer_model import TransformerModel
 from transformer.schedulers.LR_sheduler import TransformerLRScheduler
 from transformer.data.dataset import get_dataloaders
-from torch.utils.data import DataLoader
-
 
 # Training Script
 def train_model():
@@ -29,7 +25,7 @@ def train_model():
     weight_decay = 1e-4
 
     # Load Dataloaders and Tokenizer
-    train_dataloader, val_dataloader, tokenizer = get_dataloaders(batch_size,max_len)
+    train_dataloader, val_dataloader, test_dataloader, tokenizer = get_dataloaders(batch_size,max_len)
     vocab_size = len(tokenizer)
 
     # Model, Loss, Optimizer, Scheduler

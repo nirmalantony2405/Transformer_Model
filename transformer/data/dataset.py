@@ -59,7 +59,7 @@ def collate_fn(batch):
 # Dataset Preparation Function
 def get_dataloaders(batch_size, max_len, num_samples=10000):
     """
-    Load a subset of the WMT17 dataset, preprocess, and return train and validation dataloaders.
+    Load a subset of the WMT17 dataset, preprocess, and return train, validation and test dataloaders.
     """
     # Load WMT17 Dataset
     dataset = load_dataset("wmt17", "de-en")
@@ -67,6 +67,7 @@ def get_dataloaders(batch_size, max_len, num_samples=10000):
     # Reduce dataset size for faster preprocessing
     train_subset = dataset["train"].select(range(num_samples))
     valid_subset = dataset["validation"].select(range(num_samples // 10)) 
+    test_subset = dataset["test"].select(range(num_samples // 10))
 
     # Load tokenizer
     tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
@@ -74,6 +75,7 @@ def get_dataloaders(batch_size, max_len, num_samples=10000):
     # Wrap dataset in TranslationDataset
     train_dataset = TranslationDataset(train_subset, tokenizer, max_len)
     valid_dataset = TranslationDataset(valid_subset, tokenizer, max_len)
+    test_dataset = TranslationDataset(test_subset, tokenizer, max_len)
 
     # DataLoaders
     train_dataloader = DataLoader(
@@ -82,18 +84,28 @@ def get_dataloaders(batch_size, max_len, num_samples=10000):
     val_dataloader = DataLoader(
         valid_dataset, batch_size=batch_size, shuffle=False
     )
-
-    return train_dataloader, val_dataloader, tokenizer
+    test_dataloader = DataLoader(
+        test_dataset, batch_size=batch_size, shuffle=False
+    )
+    return train_dataloader, val_dataloader,test_dataloader,tokenizer
 
 
 # Main Training Script
 if __name__ == "__main__":
     batch_size = 32
     max_len = 50
-    train_dataloader, val_dataloader, tokenizer = get_dataloaders(batch_size, max_len)
+    train_dataloader, val_dataloader, test_dataloader, tokenizer = get_dataloaders(batch_size, max_len)
 
-    # Test the DataLoader
+    # DataLoaders
     for batch in train_dataloader:
         print(f"Source Batch Shape: {batch['src'].shape}")
         print(f"Target Batch Shape: {batch['tgt'].shape}")
+        break
+    for batch in val_dataloader:
+        print(f"Source Batch Shape (Validation): {batch['src'].shape}")
+        print(f"Target Batch Shape (Validation): {batch['tgt'].shape}")
+        break
+    for batch in test_dataloader:
+        print(f"Source Batch Shape (Test): {batch['src'].shape}")
+        print(f"Target Batch Shape (Test): {batch['tgt'].shape}")
         break
