@@ -46,6 +46,9 @@ model = TransformerModel(
     max_len=50,
 ).to(device)
 
+checkpoint = torch.load("transformer_model.pth")
+print(checkpoint.keys())
+
 # Set the model to evaluation mode
 model.eval()
 
