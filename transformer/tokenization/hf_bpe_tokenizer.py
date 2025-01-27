@@ -26,8 +26,8 @@ def create_gpt2_tokenizer(vocab_path=None, merges_path=None, pretrained_model_na
     Returns:
         GPT2Tokenizer: Tokenizer object.
     """
-    vocab_path = r"C:\Users\nirma\transformer_project\tokenizer_output\vocab.json"
-    merges_path = r"C:\Users\nirma\transformer_project\tokenizer_output\merges.txt"
+    vocab_path = r"C:\Users\nirma\transformer\tokenization\tokenizer_output\vocab.json"
+    merges_path = r"C:\Users\nirma\transformer\tokenization\tokenizer_output\merges.txt"
     
     if vocab_path and merges_path:
         tokenizer = GPT2Tokenizer(vocab_file=vocab_path, merges_file=merges_path)

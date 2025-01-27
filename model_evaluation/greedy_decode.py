@@ -36,7 +36,7 @@ def greedy_decode(model, src, src_mask, max_len, start_token, end_token):
 
         # Get the logits from the last position in the sequence
         logits = model.output_layer(output[:, -1, :])
-
+    
         # Get the token with the highest probability (greedy decoding)
         next_token = logits.argmax(dim=-1).item()
 

@@ -45,6 +45,8 @@ def train_model():
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model.to(device)
+    # Save the model after training
+    torch.save(model.state_dict(), "transformer_model.pth")
 
     # Training Loop
     for epoch in range(num_epochs):
