@@ -14,7 +14,7 @@ Transformer_model/
 ├── transformer
 │  ├── data
 │	   ├── dataset.py
-│    └── main.py
+│       └── main.py
 │  ├── layers
 │	   ├── feedforward.py
 │	   ├── multi_head_attention.py
