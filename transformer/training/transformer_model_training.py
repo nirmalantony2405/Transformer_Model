@@ -5,7 +5,7 @@ import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 from transformer.modelling.transformer_model import TransformerModel
-from transformer.schedulers.LR_sheduler import TransformerLRScheduler
+from transformer.schedulers.LR_scheduler import TransformerLRScheduler
 from transformer.data.dataset import get_dataloaders
 
 # Training Script
