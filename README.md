@@ -21,8 +21,7 @@
 │     └── adamw_optimizer.py
 │  ├── tokenization
 │	  ├── bpe_tokenizer.py
-│     ├── hf_bpe_tokenizer.py
-│	  └── test_tokenizer.py
+│     └── hf_bpe_tokenizer.py
 │  └── training 
 │     ├── transformer_model_training.py
 │	  └── GPU training.py
