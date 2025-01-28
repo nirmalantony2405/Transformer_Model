@@ -1,4 +1,4 @@
-python 3.11+
+python 3.11 +
 torch>=1.10.0,<2.0.0   # For PyTorch, replace with the appropriate version for your setup
 sentencepiece          # For SentencePiece tokenizer
 transformers           # For pre-trained transformer models 
