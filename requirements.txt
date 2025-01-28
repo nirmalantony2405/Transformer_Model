@@ -1,1 +1,13 @@
-
+python 3.11+
+torch>=1.10.0,<2.0.0   # For PyTorch, replace with the appropriate version for your setup
+sentencepiece          # For SentencePiece tokenizer
+transformers           # For pre-trained transformer models 
+evaluate               # For BLEU score evaluation
+numpy                  # For numerical operations
+scipy                  # For advanced numerical computations
+matplotlib             # For visualizing results
+tqdm                   # For progress bars
+PyTorch
+PyTest 
+Datasets
+Huggingface datasets   # dataset used
