@@ -10,4 +10,4 @@ tqdm                   # For progress bars
 PyTorch
 PyTest 
 Datasets
-Huggingface datasets   # dataset used
+Huggingface 
