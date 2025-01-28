@@ -13,25 +13,25 @@ Transformer_model/
 ├── tests
 ├── transformer
 │  ├── data
-│	   ├── dataset.py
-│       └── main.py
+│    ├── dataset.py
+│    └── main.py
 │  ├── layers
-│	   ├── feedforward.py
-│	   ├── multi_head_attention.py
-│	   ├── transformer_decoder.py
-│	   └── transformer_encoder.py
+│    ├── feedforward.py
+│    ├── multi_head_attention.py
+│    ├── transformer_decoder.py
+│    └── transformer_encoder.py
 │  ├── modelling
-│	   ├── model.py
-│	   └── transformer_model.py
+│    ├── model.py
+│    └── transformer_model.py
 │  ├── schedulers
-│	   ├── LR_scheduler.py
+│    ├── LR_scheduler.py
 │    └── adamw_optimizer.py
 │  ├── tokenization
-│	   ├── bpe_tokenizer.py
+│    ├── bpe_tokenizer.py
 │    └── hf_bpe_tokenizer.py
 │  └── training 
 │    ├── transformer_model_training.py
-│	   └── GPU training.ipnby
+│    └── GPU training.ipnby
 └── requirements.txt
 ```
 
