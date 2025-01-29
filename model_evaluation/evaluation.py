@@ -4,9 +4,9 @@ import torch
 import os
 import sys
 from evaluate import load
-
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from transformer.modelling.transformer_model import TransformerModel
+from transformer.tokenization.bpe_tokenizer import BPETokenizer
 
 # Load the WMT17 German-English dataset
 dataset = load_dataset("wmt17", "de-en", split="test")

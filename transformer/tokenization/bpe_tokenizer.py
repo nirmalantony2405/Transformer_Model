@@ -10,6 +10,8 @@ class BPETokenizer:
         self.vocab_size = vocab_size
         self.base_vocab = []
         self.merge_rules = []
+        self.token_to_id = {}
+        self.id_to_token = {}
 
     def get_base_vocab(self, corpus):
         """
@@ -50,7 +52,34 @@ class BPETokenizer:
                 updated_word_freqs[updated_word] = freq
             word_freqs = updated_word_freqs
 
-        return self.base_vocab + ["".join(pair) for pair in self.merge_rules]
+        # Create token-to-id and id-to-token mappings
+        vocab = self.base_vocab + ["".join(pair) for pair in self.merge_rules]
+        self.token_to_id = {token: idx for idx, token in enumerate(vocab)}
+        self.id_to_token = {idx: token for token, idx in self.token_to_id.items()}
+
+    def encode(self, text, max_length=None, padding="max_length", truncation=True):
+        """
+        Encode a given text into token IDs.
+        """
+        tokens = []
+        for word in text.split():
+            word_tokens = self.tokenize(word)
+            tokens.extend(self.token_to_id[token] for token in word_tokens if token in self.token_to_id)
+
+        # Handle truncation and padding
+        if truncation and max_length:
+            tokens = tokens[:max_length]
+        if padding == "max_length" and max_length:
+            tokens += [0] * (max_length - len(tokens))
+
+        return tokens
+
+    def decode(self, token_ids):
+        """
+        Decode token IDs back into text.
+        """
+        tokens = [self.id_to_token[token_id] for token_id in token_ids if token_id in self.id_to_token]
+        return " ".join(tokens)
 
     def tokenize(self, word):
         """

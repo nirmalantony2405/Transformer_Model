@@ -1,8 +1,11 @@
 import re
 import torch
 from datasets import load_dataset
-from transformers import BertTokenizer
 from torch.utils.data import DataLoader
+import os
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
+from transformer.tokenization.bpe_tokenizer import BPETokenizer
 
 # Cleaning Function
 def clean_text(text):
@@ -70,7 +73,7 @@ def get_dataloaders(batch_size, max_len, num_samples=10000):
     test_subset = dataset["test"].select(range(num_samples // 10))
 
     # Load tokenizer
-    tokenizer = BertTokenizer.from_pretrained("bert-base-uncased")
+    tokenizer = BPETokenizer()
 
     # Wrap dataset in TranslationDataset
     train_dataset = TranslationDataset(train_subset, tokenizer, max_len)
