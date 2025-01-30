@@ -2,7 +2,7 @@ import torch
 import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from transformer_project.modelling.transformer_model import TransformerModel
+from transformer.modelling.transformer_model import TransformerModel
 
 def test_transformer_model():
     vocab_size = 50
