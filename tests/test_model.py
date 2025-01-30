@@ -2,8 +2,8 @@ import torch
 import sys
 import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../")))
-from transformer_project.modelling.model import Attention
-from transformer_project.modelling.model import PositionalEncoding
+from transformer.modelling.model import Attention
+from transformer.modelling.model import PositionalEncoding
 def test_attention_padding_mask():
     attention = Attention(d_model=512, num_heads=8)
     seq = torch.tensor([[1, 2, 3, 0, 0], [4, 5, 0, 0, 0]])

@@ -2,7 +2,7 @@ import torch
 import sys
 import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../")))
-from transformer_project.modelling.model import Attention
+from transformer.modelling.model import Attention
 
 def test_attention_mechanism():
     attention = Attention(d_model=512, num_heads=8)
