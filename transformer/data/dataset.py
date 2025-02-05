@@ -2,6 +2,7 @@ import re
 import torch
 from datasets import load_dataset
 from torch.utils.data import DataLoader
+from transformers import AutoTokenizer
 import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
@@ -73,7 +74,7 @@ def get_dataloaders(batch_size, max_len, num_samples=10000):
     test_subset = dataset["test"].select(range(num_samples // 10))
 
     # Load tokenizer
-    tokenizer = BPETokenizer()
+    tokenizer = AutoTokenizer.from_pretrained("bert-base-multilingual-cased")
 
     # Wrap dataset in TranslationDataset
     train_dataset = TranslationDataset(train_subset, tokenizer, max_len)
