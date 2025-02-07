@@ -4,9 +4,9 @@ import math
 import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from modelling.model import PositionalEncoding
-from layers.transformer_encoder import TransformerEncoderLayer
-from layers.transformer_decoder import TransformerDecoderLayer
+from transformer.modelling.model import PositionalEncoding
+from transformer.layers.transformer_encoder import TransformerEncoderLayer
+from transformer.layers.transformer_decoder import TransformerDecoderLayer
 
 
 class PositionalEncoding(nn.Module):
