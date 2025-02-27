@@ -78,10 +78,6 @@ CPU:
 - Training Loss: 5.2400
 - Validation Loss: 7.2606
 
-GPU:
-- Loss: 0.2172062936524444
-- Validation F1 Score: 0.9229339156493394
-
 ## Known Issues
 - BLEU score is 0.2873
 - Not Exact Translation but which is close to the source
