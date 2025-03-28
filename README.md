@@ -31,7 +31,6 @@ Transformer_model/
 │    └── hf_bpe_tokenizer.py
 │  └── training 
 │    ├── transformer_model_training.py
-│    └── GPU training.ipnby
 └── requirements.txt
 ```
 
@@ -74,7 +73,6 @@ pip install -r requirements.txt
 - Dropout: 0.1
 
 ## Performance Metrics
-CPU:
 - Training Loss: 5.2400
 - Validation Loss: 7.2606
 
