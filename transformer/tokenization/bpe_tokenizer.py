@@ -26,14 +26,12 @@ class BPETokenizer:
         """
         Train the tokenizer by finding the most frequent bigrams and creating merge rules.
         """
-        # Preprocess the corpus
         words = [re.sub(r'[^\w\s]', '', sentence).split() for sentence in corpus]
         word_freqs = Counter()
         for word in words:
             word_freqs.update(word)
         word_freqs = {" ".join(word): freq for word, freq in word_freqs.items()}
 
-        # Merge rules training loop
         for _ in range(self.vocab_size - len(self.base_vocab)):
             pair_freqs = defaultdict(int)
             for word, freq in word_freqs.items():
@@ -52,7 +50,6 @@ class BPETokenizer:
                 updated_word_freqs[updated_word] = freq
             word_freqs = updated_word_freqs
 
-        # Create token-to-id and id-to-token mappings
         vocab = self.base_vocab + ["".join(pair) for pair in self.merge_rules]
         self.token_to_id = {token: idx for idx, token in enumerate(vocab)}
         self.id_to_token = {idx: token for token, idx in self.token_to_id.items()}
@@ -66,7 +63,6 @@ class BPETokenizer:
             word_tokens = self.tokenize(word)
             tokens.extend(self.token_to_id[token] for token in word_tokens if token in self.token_to_id)
 
-        # Handle truncation and padding
         if truncation and max_length:
             tokens = tokens[:max_length]
         if padding == "max_length" and max_length:
@@ -97,13 +93,11 @@ class BPETokenizer:
         vocab_path = f"{output_dir}/vocab.json"
         merges_path = f"{output_dir}/merges.txt"
 
-        # Save vocabulary
         vocab = {f"token_{i}": token for i, token in enumerate(self.base_vocab + ["".join(pair) for pair in self.merge_rules])}
         with open(vocab_path, "w", encoding="utf-8") as vocab_file:
             import json
             json.dump(vocab, vocab_file, ensure_ascii=False, indent=2)
 
-        # Save merge rules
         with open(merges_path, "w", encoding="utf-8") as merges_file:
             merges_file.write("#version: 0.2\n")
             for pair in self.merge_rules:
