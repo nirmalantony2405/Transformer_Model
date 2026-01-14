@@ -30,7 +30,6 @@ def test_transformer_model():
 
 import torch
 
-# Parameters for testing
 vocab_size = 5000  
 d_model = 512  
 n_heads = 8  
@@ -40,27 +39,22 @@ dim_feedforward = 2048
 dropout = 0.1  
 max_len = 50  
 
-# Initialize the model
 model = TransformerModel(
     vocab_size, d_model, n_heads, num_encoder_layers,
     num_decoder_layers, dim_feedforward, dropout, max_len
 )
 
-# Test data
 batch_size = 4
 src_len = 10  
 tgt_len = 10 
 
-# Generate dummy data 
 src = torch.randint(0, vocab_size, (batch_size, src_len))
 tgt = torch.randint(0, vocab_size, (batch_size, tgt_len))
 
-# Masks
 src_mask = None  
 tgt_mask = model.generate_square_subsequent_mask(tgt_len)
 memory_mask = None
 
-# Forward pass
 logits = model(src, tgt, src_mask=src_mask, tgt_mask=tgt_mask, memory_mask=memory_mask)
 print("Logits shape:", logits.shape)
 
