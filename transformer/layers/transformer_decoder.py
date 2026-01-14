@@ -20,15 +20,12 @@ class TransformerDecoderLayer(nn.Module):
         self.dropout = nn.Dropout(dropout)
 
     def forward(self, tgt, memory, tgt_mask=None, memory_mask=None):
-        # Self-attention with future masking
         self_attn_output, _ = self.self_attn(tgt, tgt, tgt, tgt_mask)
         tgt = self.norm1(tgt + self.dropout(self_attn_output))
 
-        # Cross-attention with encoder memory
         cross_attn_output, _ = self.cross_attn(tgt, memory, memory, memory_mask)
         tgt = self.norm2(tgt + self.dropout(cross_attn_output))
 
-        # Feed-forward
         ff_output = self.feed_forward(tgt)
         tgt = self.norm3(tgt + self.dropout(ff_output))
 
