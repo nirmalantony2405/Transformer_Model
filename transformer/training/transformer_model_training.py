@@ -8,9 +8,7 @@ from transformer.modelling.transformer_model import TransformerModel
 from transformer.schedulers.LR_scheduler import TransformerLRScheduler
 from transformer.data.dataset import get_dataloaders
 
-# Training Script
 def train_model():
-    # Configurations
     d_model = 64
     n_heads = 4
     num_encoder_layers = 2
@@ -24,11 +22,9 @@ def train_model():
     learning_rate = 1e-4
     weight_decay = 1e-4
 
-    # Load Dataloaders and Tokenizer
     train_dataloader, val_dataloader, test_dataloader, tokenizer = get_dataloaders(batch_size,max_len)
     vocab_size = len(tokenizer)
 
-    # Model, Loss, Optimizer, Scheduler
     model = TransformerModel(
         vocab_size=vocab_size,
         d_model=d_model,
@@ -45,10 +41,8 @@ def train_model():
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model.to(device)
-    # Save the model after training
     torch.save(model.state_dict(), "transformer_model.pth")
 
-    # Training Loop
     for epoch in range(num_epochs):
         model.train()
         train_loss = 0
@@ -72,7 +66,6 @@ def train_model():
         train_loss /= len(train_dataloader)
         print(f"Epoch {epoch + 1}, Training Loss: {train_loss:.4f}")
 
-        # Validation Loop
         model.eval()
         val_loss = 0
         with torch.no_grad():
@@ -92,8 +85,6 @@ def train_model():
         val_loss /= len(val_dataloader)
         print(f"Epoch {epoch + 1}, Validation Loss: {val_loss:.4f}")
 
-
-# Run Training
 if __name__ == "__main__":
     train_model()
 
