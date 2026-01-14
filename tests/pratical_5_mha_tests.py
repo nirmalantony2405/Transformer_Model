@@ -4,11 +4,9 @@ import sys
 import pytest
 import torch
 
-# Add the parent directory to the system path for importing modules
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from transformer.layers.multi_head_attention import MultiHeadAttention
 
-# Define test data for hidden states and attention masks
 VALUE = torch.tensor([
     [[0.0349, 0.3211, 1.5736, -0.8455],
      [0.0000, 0.0000, 0.0000, 0.0000]],
@@ -28,7 +26,6 @@ QUERY = torch.tensor([
 QUERY_ATTENTION_MASK = torch.tensor([[1, 1, 1], [1, 1, 0]])
 VALUE_ATTENTION_MASK = torch.tensor([[1, 0], [1, 1]])
 
-# Define test data for attention outputs
 MHA_TEST_DATA = [
     (
         MultiHeadAttention(QUERY.size(-1), 2, mask_future=False),
@@ -74,7 +71,6 @@ MHA_TEST_DATA = [
     )
 ]
 
-# Define test data for multi-head attention state dictionary
 STATE_DICT = {
     "query_transform.weight": torch.tensor([[1.0311, -0.7048, 1.0131, -0.3308],
                                             [0.5177, 0.3878, -0.5797, -0.1691],
@@ -95,7 +91,6 @@ STATE_DICT = {
 }
 
 
-# Multi-head Attention Layer Tests
 @pytest.mark.parametrize(
     "mha_layer, query, value, attention_mask, expected",
     MHA_TEST_DATA,
@@ -103,7 +98,6 @@ STATE_DICT = {
 )
 def test_multi_head_attention(mha_layer, query, value, attention_mask, expected):
     """Test the Multi-head Attention layer."""
-    # Load pre-defined state dictionary into the multi-head attention layer
     mha_layer.load_state_dict(STATE_DICT)
 
     assert torch.allclose(
