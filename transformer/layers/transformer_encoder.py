@@ -17,11 +17,9 @@ class TransformerEncoderLayer(nn.Module):
         self.dropout = nn.Dropout(dropout)
 
     def forward(self, src, src_mask=None):
-        # Self-attention
         attn_output, _ = self.self_attn(src, src, src, src_mask)
         src = self.norm1(src + self.dropout(attn_output))
 
-        # Feed-forward
         ff_output = self.feed_forward(src)
         src = self.norm2(src + self.dropout(ff_output))
 
