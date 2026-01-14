@@ -20,8 +20,6 @@ def clean_text(text):
     text = "".join([char for char in text if char in WHITELIST])
     return text.lower()
 
-
-# Custom Dataset Class
 class TranslationDataset(torch.utils.data.Dataset):
     """
     A custom dataset class to handle WMT17 translation data and preprocess it.
@@ -50,7 +48,6 @@ class TranslationDataset(torch.utils.data.Dataset):
                 "tgt": torch.tensor(tgt_tokens, dtype=torch.long)}
 
 
-# Collate Function
 def collate_fn(batch):
     """
     Stack tensors from the dataset into a batch.
@@ -60,28 +57,23 @@ def collate_fn(batch):
     return {"src": src, "tgt": tgt}
 
 
-# Dataset Preparation Function
 def get_dataloaders(batch_size, max_len, num_samples=10000):
     """
     Load a subset of the WMT17 dataset, preprocess, and return train, validation and test dataloaders.
     """
-    # Load WMT17 Dataset
+
     dataset = load_dataset("wmt17", "de-en")
 
-    # Reduce dataset size for faster preprocessing
     train_subset = dataset["train"].select(range(num_samples))
     valid_subset = dataset["validation"].select(range(num_samples // 10)) 
     test_subset = dataset["test"].select(range(num_samples // 10))
 
-    # Load tokenizer
     tokenizer = AutoTokenizer.from_pretrained("bert-base-multilingual-cased")
 
-    # Wrap dataset in TranslationDataset
     train_dataset = TranslationDataset(train_subset, tokenizer, max_len)
     valid_dataset = TranslationDataset(valid_subset, tokenizer, max_len)
     test_dataset = TranslationDataset(test_subset, tokenizer, max_len)
 
-    # DataLoaders
     train_dataloader = DataLoader(
         train_dataset, batch_size=batch_size, shuffle=True
     )
@@ -94,13 +86,11 @@ def get_dataloaders(batch_size, max_len, num_samples=10000):
     return train_dataloader, val_dataloader,test_dataloader,tokenizer
 
 
-# Main Training Script
 if __name__ == "__main__":
     batch_size = 32
     max_len = 50
     train_dataloader, val_dataloader, test_dataloader, tokenizer = get_dataloaders(batch_size, max_len)
 
-    # DataLoaders
     for batch in train_dataloader:
         print(f"Source Batch Shape: {batch['src'].shape}")
         print(f"Target Batch Shape: {batch['tgt'].shape}")
