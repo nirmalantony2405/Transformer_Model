@@ -4,13 +4,11 @@ import sys
 import pytest
 import torch
 
-# Add the parent directory to the system path for importing modules
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 if project_root not in sys.path:
     sys.path.append(project_root)
 from transformer.modelling.model import PositionalEncoding
 
-# Define test data
 EMBEDDING_DIM = 16
 SEQ_LEN = 8
 BATCH_SIZE = 2
@@ -321,7 +319,6 @@ TEST_DATA = [
 ]
 
 
-# Positional Encoding Layer Tests
 @pytest.mark.parametrize(
     "encoding_layer, input, expected", TEST_DATA, ids=["positional_encoding"]
 )
