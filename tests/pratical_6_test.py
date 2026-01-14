@@ -5,11 +5,9 @@ import sys
 import pytest
 import torch
 
-# Add the parent directory to the system path for importing modules
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from transformer.layers.transformer_decoder import TransformerDecoderLayer
 
-# Define test data for hidden states and attention masks
 ENCODER = torch.tensor(
     [
         [[0.0349, 0.3211, 1.5736, -0.8455], [0.0000, 0.0000, 0.0000, 0.0000]],
@@ -35,7 +33,6 @@ INPUT = torch.tensor(
 ATTENTION_MASK = torch.tensor([[1, 1, 1], [1, 1, 0]])
 ENCODER_ATTENTION_MASK = torch.tensor([[1, 0], [1, 1]])
 
-# Define test data for attention outputs (feature_dim is the hidden dimension of the position wise feed forward layer)
 TEST_DATA = [
     (
         TransformerDecoderLayer(
@@ -87,7 +84,6 @@ TEST_DATA = [
     )
 ]
 
-# Define test data for multi-head attention state dictionary
 STATE_DICT = {
     "self_attention.query_transform.weight": torch.tensor(
         [
@@ -186,7 +182,6 @@ STATE_DICT = {
 }
 
 
-# Multi-head Attention Layer Tests
 @pytest.mark.parametrize(
     "layer, input, encoder, attention_mask, encoder_attention_mask, expected",
     TEST_DATA,
@@ -194,11 +189,9 @@ STATE_DICT = {
 )
 def test_layer(layer, input, encoder, encoder_attention_mask, attention_mask, expected):
     """Test the Multi-head Attention layer."""
-    # Load pre-defined state dictionary into the multi-head attention layer
     layer.load_state_dict(STATE_DICT)
 
     actual = layer(input, encoder, encoder_attention_mask, attention_mask)
-    # Mask padded positions
     actual *= attention_mask.unsqueeze(-1).float()
 
     assert torch.allclose(actual, expected)
