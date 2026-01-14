@@ -22,7 +22,6 @@ class PositionalEncoding(nn.Module):
     def forward(self, x):
         return x + self.pe[:, :x.size(1), :]
 
-
 class TransformerModel(nn.Module):
     def __init__(
         self, 
@@ -37,11 +36,9 @@ class TransformerModel(nn.Module):
     ):
         super(TransformerModel, self).__init__()
 
-        # Embedding and Positional Encoding layers
         self.embedding = nn.Embedding(vocab_size, d_model)
         self.positional_encoding = PositionalEncoding(d_model, max_len)
 
-        # Encoder and Decoder
         self.encoder_layers = nn.ModuleList([
             TransformerEncoderLayer(d_model, n_heads, dim_feedforward, dropout)
             for _ in range(num_encoder_layers)
@@ -51,32 +48,26 @@ class TransformerModel(nn.Module):
             for _ in range(num_decoder_layers)
         ])
 
-        # Output Linear layer (shared with embedding layer)
         self.output_layer = nn.Linear(d_model, vocab_size)
         self.output_layer.weight = self.embedding.weight
 
         self.dropout = nn.Dropout(dropout)
 
     def forward(self, src, tgt, src_mask=None, tgt_mask=None, memory_mask=None):
-        # Embedding + Positional Encoding for source
         src = self.embedding(src) * math.sqrt(self.embedding.embedding_dim)
         src = self.dropout(self.positional_encoding(src))
 
-        # Embedding + Positional Encoding for target
         tgt = self.embedding(tgt) * math.sqrt(self.embedding.embedding_dim)
         tgt = self.dropout(self.positional_encoding(tgt))
 
-        # Pass source through the encoder
         memory = src
         for layer in self.encoder_layers:
             memory = layer(memory, src_mask)
 
-        # Pass target through the decoder
         output = tgt
         for layer in self.decoder_layers:
             output = layer(output, memory, tgt_mask, memory_mask)
 
-        # Final output projection
         logits = self.output_layer(output)
         return logits
     
@@ -88,7 +79,6 @@ class TransformerModel(nn.Module):
 
         memory = self.encoder_layers(self.positional_encoding(self.embedding(src)), src_mask)
 
-        # Start decoding with the start token
         tgt_tokens = torch.tensor([[start_token]], device=src.device)
 
         for _ in range(max_len):
